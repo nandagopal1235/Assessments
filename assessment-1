@@ -17,3 +17,6 @@ const validator = function (str) {
   return stack.length === 0;
 };
 console.log(validator("{ [ ] }"));
+console.log(validator("{ [ ( ] ) }"));
+console.log(validator("{ [ }")); 
+
