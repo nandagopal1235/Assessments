@@ -1,0 +1,24 @@
+const Associate = function (str) {
+  str = str.toLowerCase();
+  str = str.replace(/[,.:;]/g, "");
+  let words = str.split(" ");
+  let counts = {};
+
+  for (let i = 0; i < words.length; i++) {
+    let word = words[i];
+    if (counts[word]) {
+      counts[word] = counts[word] + 1;
+    } else {
+      counts[word] = 1;
+    }
+  }
+
+  for (let word in counts) {
+    console.log(word + " => " + counts[word]);
+  }
+}
+let text1 = "After beating the eggs, Dana read the next step:";
+let text2 = "Add milk and eggs, then add flour and sugar.";
+let longText = text1 + " " + text2;
+
+Associate(longText);
