@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #rating span {
+      font-size: 40px;
+      cursor: pointer;
+      color: gray;
+    }
+    #rating .active {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="rating">
+    <span>*</span>
+    <span>*</span>
+    <span>*</span>
+    <span>*</span>
+    <span>*</span>
+  </div>
+
+  <script>
+    function setup() {
+      const stars = document.querySelectorAll('#rating span');
+
+      stars.forEach((star, index) => {
+        star.addEventListener('click', () => {
+          stars.forEach(s => s.classList.remove('active'));
+          for (let i = 0; i <= index; i++) {
+            stars[i].classList.add('active');
+          }
+        });
+      });
+    }
+    setup(); 
+  </script>
+
+</body>
+</html>
