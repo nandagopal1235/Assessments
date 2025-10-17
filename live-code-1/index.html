@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>User Validation</title>
+</head>
+<body>
+    <h3>User Validator</h3>
+    <label>Name: <input id="name" placeholder="Enter name:"></label><br><br>
+    <button id="searchBtn">Search</button>
+    <p id="result"></p>
+
+    <script>
+        const users = [
+            { name: 'Steve', age: 18, zipcode: 35004 },
+            { name: 'John', age: 34, zipcode: 99501 },
+            { name: 'Jack', age: 19, zipcode: 99535 },
+            { name: 'Jonas', age: 26, zipcode: 85001 },
+            { name: 'Smith', age: 39, zipcode: 71601 },
+            { name: 'Casey', age: 26, zipcode: 32003 },
+            { name: 'Robert', age: 17, zipcode: 96701 },
+            { name: 'Daniel', age: 21, zipcode: 83201 },
+            { name: 'Joseph', age: 42, zipcode: 70001 },
+            { name: 'Jessica', age: 31, zipcode: 59001 },
+            { name: 'Tom', age: 32, zipcode: 37010 },
+            { name: 'Trevor', age: 24, zipcode: 24701 },
+            { name: 'Mark', age: 54, zipcode: 96910 },
+            { name: 'Jamie', age: 39, zipcode: 84001 },
+            { name: 'Alex', age: 15, zipcode: 88595 }
+        ];
+
+        async function checkZip(zip) {
+            try {
+                const res = await fetch(`https://api.zippopotam.us/us/${zip}`);
+                if (!res.ok) return null;
+                const data = await res.json();
+                const place = data.places && data.places[0];
+                return `${place['place name']}, ${place['state']}, ${data['country']}`;
+            } catch {
+                return null;
+            }
+        }
+
+        document.getElementById("searchBtn").onclick = async function () {
+            const nameInput = document.getElementById("name").value.trim().toLowerCase();
+            const result = document.getElementById("result");
+
+            const user = users.find(u => u.name.toLowerCase() === nameInput);
+
+            if (!user) {
+                result.textContent = "User not found";
+                return;
+            }
+
+            if (user.age < 18) {
+                result.textContent = "User found but under the age limit";
+                return;
+            }
+
+            result.textContent = "Checking zip...";
+            const location = await checkZip(user.zipcode);
+
+            if (location) {
+                result.textContent = `User found\nLocation: ${location}`;
+            } else {
+                result.textContent = "User found and Invalid Zip code";
+            }
+        };
+    </script>
+</body>
+</html>
