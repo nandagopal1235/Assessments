@@ -2,16 +2,19 @@
   background-color: blue;
   color: azure;
 }
+
 .add-task-input {
   background-color: lightsalmon;
   padding: 10px;
   border: 3px solid black;
 }
+
 .add-task-action {
   display: flex;
   justify-content: center;
   gap: 5px;
 }
+
 .task-list li {
   margin-top: 10px;
   background-color: blue;
@@ -21,6 +24,29 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
+
+/* new: layout for text + delete button */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* click to toggle */
+.task-text {
+  cursor: pointer;
+}
+
+/* delete button */
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 .task-list .completed {
   text-decoration: line-through;
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function TaskForm({ addTask }) {
   const [value, setValue] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (value.trim()) {
@@ -10,8 +11,9 @@ export default function TaskForm({ addTask }) {
       setValue("");
     }
   };
+
   return (
-    <form action="" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="add-task-action">
         <input
           type="text"
